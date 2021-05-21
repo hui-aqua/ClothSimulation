@@ -15,31 +15,35 @@ Link::Link(Point* p1, Point* p2, float length)
 
 void Link::update(float dt, float x, float y)
 {
-    float vx = m_p2->x - m_p1->x;
-    float vy = m_p2->y - m_p1->y;
+    float dx = m_p2->x - m_p1->x;   // dx 
+    float dy = m_p2->y - m_p1->y;   // dy
 
-    float dist = sqrt(vx*vx+vy*vy)+0.0001f;
+    float dist = sqrt(dx*dx+dy*dy)+0.00001f; // ensure not zero
 
-    float f = (dist-m_length)/dist*0.5f;
+    // tension force over 
+    float f = std::max((dist-m_length),0.0f)/dist*0.5f;
+    // color of links
+    m_p2->color = sf::Color::Blue;
 
-    m_p2->color = sf::Color::White;
-
+    // mass coeff?
     float coeff_mass_1 = m_p2->mass/(m_p1->mass+m_p2->mass);
     float coeff_mass_2 = m_p1->mass/(m_p1->mass+m_p2->mass);
 
-    if (dist > m_length+3)
+    
+    // broken condition
+    if (dist > m_length*2)
         m_broken = true;
 
     if (!m_p1->fixed)
     {
-        m_p1->x += vx*(f)*coeff_mass_1;
-        m_p1->y += vy*(f)*coeff_mass_1;
+        m_p1->x += dx*(f)*coeff_mass_1; // x=dx*tension force*
+        m_p1->y += dy*(f)*coeff_mass_1;
     }
 
     if (!m_p2->fixed)
     {
-        m_p2->x -= vx*(f)*coeff_mass_2;
-        m_p2->y -= vy*(f)*coeff_mass_2;
+        m_p2->x -= dx*(f)*coeff_mass_2;
+        m_p2->y -= dy*(f)*coeff_mass_2;
     }
 
     Vec v_mouse = Vec(m_p1->x-x, m_p1->y-y);

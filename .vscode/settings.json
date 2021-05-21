@@ -1,6 +1,15 @@
 {
     "files.associations": {
-        "*.tpp": "cpp"
+        "*Dict": "OpenFOAM",
+        "*Properties": "OpenFOAM",
+        "fvSchemes": "OpenFOAM",
+        "*sG*": "OpenFOAM",
+        "*probe*": "OpenFOAM",
+        "fvSolution": "OpenFOAM",
+        "**/constant/g": "OpenFOAM",
+        "**/0/*": "OpenFOAM",
+        "*.tpp": "cpp",
+        "*.tcc": "cpp"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

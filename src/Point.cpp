@@ -80,8 +80,8 @@ void Point::updatePos(float dt)
             x = 0;
         }
 
-        ax += -(vx*0.05f/dt)/mass;
-        ay += -(vy*0.05f/dt)/mass;
+        ax += -(vx*0.07f/dt)/mass;
+        ay += -(vy*0.01f/dt)/mass;
 
         float new_x = 2.0f*x-last_x+ax*dt*dt;
         float new_y = 2.0f*y-last_y+ay*dt*dt;

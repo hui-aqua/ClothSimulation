@@ -9,12 +9,15 @@ int main()
 {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 1;
-    sf::RenderWindow window(sf::VideoMode(1600, 900), "Cloth", sf::Style::Default);
+    // create the window
+    sf::RenderWindow window(sf::VideoMode(1600, 1000), "Netting-cut", sf::Style::Default);
     window.setVerticalSyncEnabled(false);
 
     World world;
 
-    world.addCloth(300, 0, 100, 75);
+    world.addCloth(20, 20, 50, 50);
+    // world.addCloth(1000, 20, 50, 50);
+    // world.addCloth(0, 50, 80, 80);
     bool click = false;
 
     while (window.isOpen())
@@ -24,7 +27,8 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-
+            
+            // Esc is exist the windows
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 window.close();
 
@@ -40,18 +44,18 @@ int main()
 
         }
 
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::White);
 
         sf::Vector2i localPosition = sf::Mouse::getPosition(window);
 
         if (click)
-            world.update(localPosition.x, localPosition.y);
+            world.cut_update(localPosition.x, localPosition.y);
         else
-            world.update(-10000.0f, -10000.0f);
+            world.cut_update(-10000.0f, -10000.0f);
 
         world.render(window);
-
         window.display();
+
     }
 
     return 0;

@@ -6,7 +6,7 @@ World::World()
     m_clock.restart();
 }
 
-void World::update(float x, float y)
+void World::cut_update(float x, float y)
 {
     float dt = 0.0005f;
     m_clock.restart();
@@ -46,26 +46,26 @@ void World::render(sf::RenderWindow &window)
     window.draw(links);
 }
 
-void World::addCloth(float x, float y, float l, float h)
+void World::addCloth(float x_0, float y_0, float num_of_link_x, float num_of_link_y)
 {
-    float side = 10.0f;
+    float link_length = 11.0f;
 
-    for (int i(0); i<l; ++i)
+    for (int i(0); i<num_of_link_x; ++i)
     {
-        for (int j(0); j<h; ++j)
+        for (int j(0); j<num_of_link_y; ++j)
         {
-            Point* p = new Point(x+side*i, y+side*j, side * 0.1f);
+            Point* p = new Point(x_0+link_length*i, y_0+link_length*j, 1000);
             this->addPoint(p);
 
             if (i > 0)
             {
-                Point* px = m_points[static_cast<uint64_t>((i-1)*h)+j];
+                Point* px = m_points[static_cast<uint64_t>((i-1)*num_of_link_y)+j];
                 this->addLink(new Link(p, px));
             }
 
             if (j > 0)
             {
-                Point* py = m_points[static_cast<uint64_t>(i*h)+j-1];
+                Point* py = m_points[static_cast<uint64_t>(i*num_of_link_y)+j-1];
                 this->addLink(new Link(p, py));
             }
             else
