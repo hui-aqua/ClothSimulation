@@ -10,14 +10,14 @@ int main()
     sf::ContextSettings settings;
     settings.antialiasingLevel = 1;
     // create the window
-    sf::RenderWindow window(sf::VideoMode(1600, 1000), "Netting-cut", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(160, 100), "Netting-cut", sf::Style::Default);
     window.setVerticalSyncEnabled(false);
 
     World world;
 
-    world.addCloth(20, 20, 50, 50);
+    // world.addCloth(20, 20, 50, 50);
     // world.addCloth(1000, 20, 50, 50);
-    // world.addCloth(0, 50, 80, 80);
+    world.addCloth(0, 50, 80, 80);
     bool click = false;
 
     while (window.isOpen())
